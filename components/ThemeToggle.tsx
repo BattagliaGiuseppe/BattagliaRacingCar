@@ -1,22 +1,39 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
-    setMounted(true);
+    if (
+      localStorage.theme === "dark" ||
+      (!localStorage.theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setTheme("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      setTheme("light");
+    }
   }, []);
 
-  if (!mounted) return null;
+  const toggleTheme = () => {
+    if (theme === "light") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setTheme("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setTheme("light");
+    }
+  };
 
   return (
     <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="p-2 bg-gray-200 dark:bg-gray-700 rounded"
+      onClick={toggleTheme}
+      className="px-3 py-1 border rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition"
     >
       {theme === "light" ? "☀️ Light" : "🌙 Dark"}
     </button>
