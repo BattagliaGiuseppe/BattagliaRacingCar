@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
         {/* Navbar */}
         <header className="flex items-center justify-between px-6 py-4 shadow bg-gray-100 dark:bg-gray-800">
           <nav className="flex items-center space-x-6">
