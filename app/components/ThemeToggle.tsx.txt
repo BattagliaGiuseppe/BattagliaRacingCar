@@ -1,0 +1,54 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function ThemeToggle() {
+  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [mounted, setMounted] = useState(false);
+
+  // Legge il tema salvato al primo montaggio (solo client)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("theme") as "dark" | "light" | null;
+      if (saved === "dark" || saved === "light") {
+        setTheme(saved);
+      } else {
+        // se non c'è preferenza esplicita, usa preferenza di sistema
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(prefersDark ? "dark" : "light");
+      }
+    } catch (e) {
+      // se localStorage non è disponibile, rimaniamo su light
+      setTheme("light");
+    } finally {
+      setMounted(true);
+    }
+  }, []);
+
+  // Applica la classe e la salva quando cambia tema
+  useEffect(() => {
+    if (!mounted) return;
+    try {
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      localStorage.setItem("theme", theme);
+    } catch (e) {
+      // ignore
+    }
+  }, [theme, mounted]);
+
+  if (!mounted) return null; // evita mismatch SSR/CSR
+
+  return (
+    <button
+      onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+      className="px-3 py-2 rounded-md border hover:opacity-90 transition"
+      aria-label="Toggle tema"
+    >
+      {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+    </button>
+  );
+}

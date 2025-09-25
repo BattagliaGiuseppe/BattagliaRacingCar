@@ -1,0 +1,27 @@
+import { supabase } from "@/lib/supabaseClient";
+
+export default async function ComponentsPage() {
+  const { data: components, error } = await supabase
+    .from("components")
+    .select("*");
+
+  if (error) return <p>Errore: {error.message}</p>;
+  if (!components) return <p>Nessun componente trovato.</p>;
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Componenti</h1>
+      <ul className="space-y-2">
+        {components.map((component) => (
+          <li key={component.id} className="p-4 border rounded shadow">
+            <p><strong>Tipo:</strong> {component.tipo}</p>
+            <p><strong>Seriale:</strong> {component.serial_number}</p>
+            <p><strong>Omologazione:</strong> {component.omologazione || "N/A"}</p>
+            <p><strong>Data scadenza:</strong> {component.data_scadenza || "N/A"}</p>
+            <p><strong>Stato:</strong> {component.stato}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

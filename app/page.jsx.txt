@@ -1,0 +1,15 @@
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-6">Parco Auto da Corsa</h1>
+      <nav className="space-y-2">
+        <Link href="/cars" className="text-blue-600">🚗 Auto</Link><br/>
+        <Link href="/components" className="text-blue-600">🔧 Componenti</Link><br/>
+        <Link href="/maintenance" className="text-blue-600">🛠️ Manutenzioni</Link><br/>
+        <Link href="/events" className="text-blue-600">📅 Eventi</Link>
+      </nav>
+    </div>
+  );
+}

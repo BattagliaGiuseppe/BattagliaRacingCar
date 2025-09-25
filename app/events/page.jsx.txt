@@ -1,0 +1,26 @@
+import { supabase } from "@/lib/supabaseClient";
+
+export default async function EventsPage() {
+  const { data: events, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("data", { ascending: true });
+
+  if (error) return <p>Errore: {error.message}</p>;
+  if (!events) return <p>Nessun evento trovato.</p>;
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Eventi</h1>
+      <ul className="space-y-2">
+        {events.map((event) => (
+          <li key={event.id} className="p-4 border rounded shadow">
+            <p><strong>Titolo:</strong> {event.titolo}</p>
+            <p><strong>Data:</strong> {event.data}</p>
+            <p><strong>Tipo:</strong> {event.tipo}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
