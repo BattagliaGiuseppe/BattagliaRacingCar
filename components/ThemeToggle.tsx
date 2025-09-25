@@ -1,25 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
-      className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-sm"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="p-2 bg-gray-200 dark:bg-gray-700 rounded"
     >
-      {darkMode ? "🌙 Dark" : "☀️ Light"}
+      {theme === "light" ? "☀️ Light" : "🌙 Dark"}
     </button>
   );
 }
-
