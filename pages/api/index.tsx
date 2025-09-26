@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import ThemeToggle from "../../components/ThemeToggle";
+import ThemeToggle from '../../components/ThemeToggle'
 
 type ComponentRow = {
   id: number
