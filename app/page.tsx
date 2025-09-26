@@ -9,10 +9,8 @@ export default function HomePage() {
       <p className="text-lg mb-4">
         Questo è il tuo nuovo progetto Next.js.
       </p>
-      <Link href="/components">
-        <a className="text-blue-500 hover:underline">
-          Vai a Components →
-        </a>
+      <Link href="/components" className="text-blue-500 hover:underline">
+        Vai a Components →
       </Link>
     </main>
   );
