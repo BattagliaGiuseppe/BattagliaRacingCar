@@ -25,7 +25,7 @@ export default function HomePage() {
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             Gestisci i componenti con manutenzione e scadenze
           </p>
-          <a
+           <a
             href="/components"
             className="text-blue-500 hover:underline"
           >
