@@ -12,6 +12,12 @@ export default function HomePage() {
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             Gestisci le auto della scuderia
           </p>
+          <a
+            href="/cars"
+            className="text-blue-500 hover:underline"
+          >
+            Vai a Cars →
+          </a>
         </div>
 
         <div className="p-6 rounded-xl shadow bg-gray-50 dark:bg-gray-800">
@@ -19,12 +25,7 @@ export default function HomePage() {
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             Gestisci i componenti con manutenzione e scadenze
           </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+          <a
             href="/components"
             className="text-blue-500 hover:underline"
           >
